@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dominic Talbot — Software Engineer</title>
     <link rel="icon" href="favicon.ico" />
-    <!-- Tailwind CDN -->
+    <!-- Tailwind CDN with fallback -->
+    <link rel="stylesheet" href="css/tailwind-fallback.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -66,6 +67,14 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
       rel="stylesheet"
     />
+    <!-- Font fallback -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+      /* Fallback font stack */
+      body, html {
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      }
+    </style>
     <!-- Prism (syntax highlight) -->
     <link
       href="https://unpkg.com/prismjs@1.29.0/themes/prism-okaidia.min.css"
@@ -942,12 +951,12 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
       </div>
     </div>
 
-    <!-- GSAP + ScrollTrigger -->
-    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <!-- Prism -->
-    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
-    <script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <!-- GSAP + ScrollTrigger with fallbacks -->
+    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js" onerror="console.warn('GSAP CDN failed, using fallback animations')"></script>
+    <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js" onerror="console.warn('ScrollTrigger CDN failed, using fallback scrolling')"></script>
+    <!-- Prism with fallbacks -->
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js" onerror="console.warn('Prism CDN failed, syntax highlighting disabled')"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" onerror="console.warn('Prism autoloader failed')"></script>
 
     <script>
       // Year
@@ -963,40 +972,88 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
         );
       });
 
-      // Smooth parallax w/ GSAP
-      const parallax = document.querySelectorAll(".parallax-layer");
-      parallax.forEach((layer) => {
-        gsap.to(layer, {
-          yPercent: gsap.utils.random(-10, 10),
-          xPercent: gsap.utils.random(-10, 10),
-          ease: "none",
-          scrollTrigger: { scrub: 1 },
+      // Check if GSAP is available and add fallbacks
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        // GSAP is available - use enhanced animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Smooth parallax w/ GSAP
+        const parallax = document.querySelectorAll(".parallax-layer");
+        parallax.forEach((layer) => {
+          gsap.to(layer, {
+            yPercent: gsap.utils.random(-10, 10),
+            xPercent: gsap.utils.random(-10, 10),
+            ease: "none",
+            scrollTrigger: { scrub: 1 },
+          });
         });
-      });
 
-      // Reveal animations
-      gsap.utils.toArray("section, .timeline-item, .group").forEach((el, i) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 30,
-          duration: 0.7,
-          delay: i * 0.03,
-          scrollTrigger: { trigger: el, start: "top 85%" },
+        // Reveal animations
+        gsap.utils.toArray("section, .timeline-item, .group").forEach((el, i) => {
+          gsap.from(el, {
+            opacity: 0,
+            y: 30,
+            duration: 0.7,
+            delay: i * 0.03,
+            scrollTrigger: { trigger: el, start: "top 85%" },
+          });
         });
-      });
 
-      // Timeline progress
-      const tlWrap = document.getElementById("timeline");
-      const tlProg = document.getElementById("timeline-progress");
-      ScrollTrigger.create({
-        trigger: tlWrap,
-        start: "top 80%",
-        end: "bottom 60%",
-        onUpdate: (self) => {
-          const h = self.progress * tlWrap.offsetHeight;
-          tlProg.style.height = h + "px";
-        },
-      });
+        // Timeline progress
+        const tlWrap = document.getElementById("timeline");
+        const tlProg = document.getElementById("timeline-progress");
+        if (tlWrap && tlProg) {
+          ScrollTrigger.create({
+            trigger: tlWrap,
+            start: "top 80%",
+            end: "bottom 60%",
+            onUpdate: (self) => {
+              const h = self.progress * tlWrap.offsetHeight;
+              tlProg.style.height = h + "px";
+            },
+          });
+        }
+      } else {
+        // GSAP not available - use CSS fallbacks
+        console.warn('GSAP not available, using fallback animations');
+        
+        // Simple fade-in for sections using Intersection Observer
+        if ('IntersectionObserver' in window) {
+          const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+          };
+          
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+              }
+            });
+          }, observerOptions);
+          
+          // Observe all sections and timeline items
+          document.querySelectorAll('section, .timeline-item, .group').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+            observer.observe(el);
+          });
+        }
+        
+        // Fallback timeline progress using scroll event
+        const tlWrap = document.getElementById("timeline");
+        const tlProg = document.getElementById("timeline-progress");
+        if (tlWrap && tlProg) {
+          window.addEventListener('scroll', () => {
+            const rect = tlWrap.getBoundingClientRect();
+            const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+            tlProg.style.height = (progress * tlWrap.offsetHeight) + 'px';
+          });
+        }
+      }
 
       // Modals (native <dialog>)
       function bindModals() {
