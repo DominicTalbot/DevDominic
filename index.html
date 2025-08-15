@@ -101,7 +101,7 @@
     </style>
   </head>
   <body
-    class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-sans"
+    class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-sans overflow-x-hidden"
   >
     <!-- Theme init -->
     <script>
@@ -117,7 +117,7 @@
     </script>
 
     <!-- Floating controls -->
-    <div class="fixed right-4 top-4 z-50 flex gap-2">
+    <div class="fixed right-2 top-2 z-50 flex gap-2 sm:right-4 sm:top-4">
       <button
         id="theme-toggle"
         class="rounded-full shadow-elevate px-3 py-2 bg-white/80 backdrop-blur dark:bg-slate-800/80 hover:scale-105 transition"
@@ -434,7 +434,7 @@
         Type HTML/CSS/JS below and run it inline. Useful for showcasing
         micro-interactions or utility snippets.
       </p>
-      <div class="grid lg:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <div
             class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700"
@@ -451,7 +451,7 @@
               </button>
             </div>
             <pre
-              class="m-0 p-0"
+              class="m-0 p-0 text-xs sm:text-sm overflow-auto max-h-64"
             ><code id="demo-code" class="language-html">&lt;!doctype html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -470,7 +470,7 @@
         </div>
         <iframe
           id="demo-frame"
-          class="w-full min-h-[360px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white"
+          class="w-full min-h-[260px] sm:min-h-[360px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white"
         ></iframe>
       </div>
     </section>
