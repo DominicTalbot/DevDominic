@@ -474,23 +474,118 @@
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl font-extrabold mb-6">Skills</h2>
         <ul class="flex flex-wrap gap-3 text-sm">
+          <!-- Programming & Development -->
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Software Development
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            C#
+          </li>
           <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
             JavaScript
           </li>
           <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
-            Python
+            Unit Testing
           </li>
           <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
-            Node.js
+            Test-Driven Development (TDD)
           </li>
           <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
-            React
+            Secure Coding Practices
           </li>
           <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
-            Java
+            API Development (REST APIs, RESTful Design)
           </li>
           <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
-            C#
+            Technology Stack
+          </li>
+          <!-- Web Technologies -->
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            HTML5
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            CSS
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            User Interface (UI) Design
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            jQuery
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Web Applications
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Bootstrap (Framework)
+          </li>
+          <!-- Game & Visual Development -->
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Maya
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Unity
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Unreal Engine
+          </li>
+          <!-- Frameworks & Tools -->
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            .NET 6.0
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            ASP.NET MVC
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Entity Framework
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Git (Version Control)
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            MongoDB
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Microsoft SQL Server
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Visual Studio
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            DevOps Tools and Practices
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            SQL
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Dashboard Building
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            QX/SX
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Middleware Automation
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Automated Document Population
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Middleware Scripting
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Data Profiling
+          </li>
+          <!-- Additional IT & Methodologies -->
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Information Technology
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Database Design & Administration
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Scrum (Agile Methodology)
+          </li>
+          <li class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800">
+            Passionate about work
           </li>
         </ul>
       </div>
@@ -516,12 +611,11 @@
           class="rounded-2xl p-6 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/60 shadow-sm"
         >
           <form
-            name="contact"
+            id="contact-form"
+            action="https://formspree.io/f/mqaljjbp"
             method="POST"
-            data-netlify="true"
             class="grid gap-3"
           >
-            <input type="hidden" name="form-name" value="contact" />
             <input
               required
               name="name"
@@ -543,10 +637,17 @@
               class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-brand-500 focus:outline-none"
             ></textarea>
             <button
+              type="submit"
               class="justify-self-start px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700"
             >
               Send
             </button>
+            <div
+              id="contact-success"
+              class="hidden mt-4 text-green-600 font-semibold"
+            >
+              Thank you! Your message has been sent.
+            </div>
           </form>
         </div>
       </div>
@@ -859,6 +960,28 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
             : "I can talk about my stack, projects, experience, education, or contact — try asking about one of those!"
         );
         botInput.value = "";
+      });
+
+      const contactForm = document.getElementById("contact-form");
+      const contactSuccess = document.getElementById("contact-success");
+
+      contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const data = new FormData(contactForm);
+        const res = await fetch(contactForm.action, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" },
+        });
+        if (res.ok) {
+          contactForm.reset();
+          contactSuccess.classList.remove("hidden");
+        } else {
+          contactSuccess.textContent =
+            "Sorry, there was a problem sending your message.";
+          contactSuccess.classList.remove("hidden");
+          contactSuccess.classList.add("text-red-600");
+        }
       });
     </script>
   </body>
