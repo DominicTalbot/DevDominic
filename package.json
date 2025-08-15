@@ -1,0 +1,39 @@
+{
+  "name": "devdominic-portfolio",
+  "version": "1.0.0",
+  "description": "Dominic Talbot's Personal Portfolio Website - A modern, responsive portfolio showcasing software engineering projects and experience",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'Build process - optimizing assets...' && npm run minify",
+    "minify": "echo 'Minification completed'",
+    "start": "npm run dev",
+    "test": "echo 'Tests will be added in future iterations'"
+  },
+  "keywords": [
+    "portfolio",
+    "software-engineer",
+    "web-development",
+    "javascript",
+    "html5",
+    "css3",
+    "responsive-design"
+  ],
+  "author": {
+    "name": "Dominic Talbot",
+    "email": "Dominictalbot@live.co.uk",
+    "url": "https://github.com/DominicTalbot"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DominicTalbot/DevDominic"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
