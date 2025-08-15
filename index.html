@@ -785,7 +785,10 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
     </dialog>
 
     <!-- MINI CHATBOT -->
-    <div id="bot" class="fixed bottom-4 right-4 z-50 w-[320px] max-w-[92vw]">
+    <div
+      id="bot"
+      class="fixed bottom-4 right-4 z-50 w-full max-w-xs sm:max-w-[320px] max-w-[92vw]"
+    >
       <button
         id="bot-toggle"
         class="w-full rounded-xl shadow-elevate px-4 py-3 bg-brand-600 text-white flex items-center justify-between"
