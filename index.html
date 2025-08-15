@@ -456,14 +456,130 @@
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;/&gt;
-  &lt;style&gt;body{font-family:system-ui;margin:2rem} .btn{padding:.6rem 1rem;border-radius:.8rem;border:none;background:#3b82f6;color:white} .btn:hover{filter:brightness(1.1)} @keyframes pop{0%{transform:scale(.96)}100%{transform:scale(1)}} .card{padding:1rem;border-radius:1rem;border:1px solid #e5e7eb;box-shadow:0 10px 30px rgba(0,0,0,.08);animation:pop .2s ease-out}&lt;/style&gt;
+  &lt;style&gt;
+    body {
+      font-family: 'Cinzel', serif;
+      margin: 2rem;
+      background: #fdf6e3;
+      color: #3e2723;
+      text-align: center;
+    }
+    h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .btn {
+      padding: 0.6rem 1rem;
+      border-radius: 0.8rem;
+      border: none;
+      background: #b58900;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .dice {
+  font-size: 3rem;
+  width: 3.5rem;       /* fixed width */
+  height: 3.5rem;      /* fixed height */
+  line-height: 3.5rem; /* center the emoji vertically */
+  margin: 0.5rem;
+  display: inline-block;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 50%;  /* makes it circular */
+  background: #fdf6e3; /* same as body for seamless feel */
+}
+    .rolled { transform: rotate(15deg) scale(1.2); }
+    .glow-gold {
+  box-shadow: 0 0 15px 5px gold; /* circular glow */
+}
+    .glow-red {
+  box-shadow: 0 0 15px 5px crimson; /* circular glow */
+}
+    .scoreboard { margin-top: 1rem; font-weight: bold; }
+    .banter { margin-top: 0.5rem; font-style: italic; color: #5d4037; }
+  &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;div class=&quot;card&quot;&gt;
-    &lt;h3&gt;Hello, recruiter!&lt;/h3&gt;
-    &lt;p&gt;This is a tiny interactive demo embedded in my portfolio.&lt;/p&gt;
-    &lt;button class=&quot;btn&quot; onclick=&quot;this.textContent='Clicked! ✅'&quot;&gt;Click me&lt;/button&gt;
+  &lt;h3&gt;🎲 Medieval Dice Duel&lt;/h3&gt;
+  &lt;p&gt;First to 3 wins claims the tavern bragging rights!&lt;/p&gt;
+
+  &lt;div&gt;
+    &lt;div class=&quot;dice&quot; id=&quot;player-dice&quot;&gt;⚀&lt;/div&gt;
+    &lt;div class=&quot;dice&quot; id=&quot;npc-dice&quot;&gt;⚀&lt;/div&gt;
   &lt;/div&gt;
+
+  &lt;button class=&quot;btn&quot; onclick=&quot;playRound()&quot;&gt;Roll the Dice&lt;/button&gt;
+  &lt;div class=&quot;scoreboard&quot; id=&quot;scoreboard&quot;&gt;You: 0 | NPC: 0&lt;/div&gt;
+  &lt;div class=&quot;banter&quot; id=&quot;banter&quot;&gt;&lt;/div&gt;
+
+  &lt;script&gt;
+    const diceFaces = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+    let playerScore = 0;
+    let npcScore = 0;
+    const banterWin = [
+      &quot;Bah! Fortune favors you this time...&quot;,
+      &quot;A fine throw, traveler!&quot;,
+      &quot;You’ll not win the next bout!&quot;
+    ];
+    const banterLose = [
+      &quot;Ha! My luck's better than yours!&quot;,
+      &quot;You’ll need more than that to best me.&quot;,
+      &quot;Lady Luck smiles upon me today!&quot;
+    ];
+    const banterTie = [
+      &quot;A tie? Again? Boring!&quot;,
+      &quot;Evenly matched, eh?&quot;,
+      &quot;We’ll settle this next throw!&quot;
+    ];
+
+    function roll() {
+      return Math.floor(Math.random() * 6);
+    }
+
+    function playRound() {
+      const playerRoll = roll();
+      const npcRoll = roll();
+
+      const playerDice = document.getElementById('player-dice');
+      const npcDice = document.getElementById('npc-dice');
+      const banter = document.getElementById('banter');
+
+      [playerDice, npcDice].forEach(d =&gt; {
+        d.classList.add('rolled');
+        setTimeout(() =&gt; d.classList.remove('rolled'), 200);
+      });
+
+      setTimeout(() =&gt; {
+        playerDice.textContent = diceFaces[playerRoll];
+        npcDice.textContent = diceFaces[npcRoll];
+
+        playerDice.classList.remove('glow-gold');
+        npcDice.classList.remove('glow-red');
+        if (playerRoll === 5) playerDice.classList.add('glow-gold');
+        if (npcRoll === 5) npcDice.classList.add('glow-red');
+
+        if (playerRoll &gt; npcRoll) {
+          playerScore++;
+          banter.textContent = banterWin[Math.floor(Math.random()*banterWin.length)];
+        } else if (npcRoll &gt; playerRoll) {
+          npcScore++;
+          banter.textContent = banterLose[Math.floor(Math.random()*banterLose.length)];
+        } else {
+          banter.textContent = banterTie[Math.floor(Math.random()*banterTie.length)];
+        }
+
+        document.getElementById('scoreboard').textContent = `You: ${playerScore} | NPC: ${npcScore}`;
+
+        if (playerScore === 3 || npcScore === 3) {
+          banter.textContent = playerScore &gt; npcScore
+            ? &quot;🏆 You’ve bested me... for now.&quot;
+            : &quot;💀 I reign supreme, traveler.&quot;;
+          playerScore = 0;
+          npcScore = 0;
+        }
+      }, 250);
+    }
+  &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
           </div>
@@ -794,19 +910,17 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
     </dialog>
 
     <!-- MINI CHATBOT -->
-    <div
-      id="bot"
-      class="fixed bottom-4 right-4 z-50 w-full max-w-xs sm:max-w-[320px] max-w-[92vw]"
-    >
+    <div id="bot" class="fixed bottom-4 right-4 z-50 flex flex-col items-end">
       <button
         id="bot-toggle"
-        class="w-full rounded-xl shadow-elevate px-4 py-3 bg-brand-600 text-white flex items-center justify-between"
+        class="rounded-full w-14 h-14 flex items-center justify-center shadow-elevate bg-brand-600 text-white text-2xl hover:bg-brand-700 transition"
+        title="Ask me about my skills"
       >
-        <span>Ask about my skills</span><span>💬</span>
+        💬
       </button>
       <div
         id="bot-panel"
-        class="hidden mt-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 overflow-hidden"
+        class="hidden mt-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 overflow-hidden w-[90vw] max-w-xs"
       >
         <div class="max-h-72 overflow-auto p-3" id="bot-log">
           <div class="text-sm text-slate-500">
