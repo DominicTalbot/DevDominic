@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
@@ -413,6 +413,38 @@
                 >
                 <button
                   data-modal="modal-brakehill"
+                  class="px-3 py-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 shadow-elevate"
+          >
+            <img
+              src="images/payment-app.png"
+              alt="Payment Application"
+              class="h-48 w-full object-cover transform transition duration-500 group-hover:scale-105"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold">Payment Application</h3>
+              <p class="mt-2 text-slate-600 dark:text-slate-300">
+                Full-stack payment system with user authentication, transaction
+                handling, and balance management. Built with secure backend
+                logic and REST APIs.
+              </p>
+              <div class="mt-4 flex gap-3 text-sm">
+                <a
+                  target="_blank"
+                  href="https://github.com/DominicTalbot/PaymentApp"
+                  class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700"
+                  >Repo</a
+                >
+                <button
+                  data-modal="modal-payment"
                   class="px-3 py-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
                   Details
@@ -959,7 +991,7 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
         r.classList.toggle("dark");
         localStorage.setItem(
           "theme",
-          r.classList.contains("dark") ? "dark" : "light"
+          r.classList.contains("dark") ? "dark" : "light",
         );
       });
 
@@ -1010,13 +1042,13 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
           .querySelectorAll("dialog [data-close]")
           .forEach((x) =>
             x.addEventListener("click", (e) =>
-              e.target.closest("dialog").close()
-            )
+              e.target.closest("dialog").close(),
+            ),
           );
         document.querySelectorAll("dialog").forEach((d) =>
           d.addEventListener("click", (e) => {
             if (e.target === d) d.close();
-          })
+          }),
         );
       }
       bindModals();
@@ -1311,7 +1343,7 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
         botLog.scrollTop = botLog.scrollHeight;
       }
       botToggle.addEventListener("click", () =>
-        botPanel.classList.toggle("hidden")
+        botPanel.classList.toggle("hidden"),
       );
       botForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -1326,7 +1358,7 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
         botSay(
           hit
             ? hit.a
-            : "I can talk about my stack, projects, experience, education, or contact — try asking about one of those!"
+            : "I can talk about my stack, projects, experience, education, or contact — try asking about one of those!",
         );
         botInput.value = "";
       });
