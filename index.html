@@ -940,6 +940,71 @@ const [mode, setMode] = useState(prefersDark ? 'dark' : 'light');
         </div>
       </div>
     </dialog>
+    <dialog
+  id="modal-payment"
+  class="rounded-2xl w-11/12 md:w-2/3 lg:w-1/2 p-0 overflow-hidden"
+>
+  <div
+    class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100"
+  >
+    <div
+      class="p-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between"
+    >
+      <h3 class="text-xl font-bold">Payment Application — Details</h3>
+      <button
+        class="text-slate-500 hover:text-slate-900 dark:hover:text-white"
+        data-close
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="p-6 grid gap-4">
+      <img
+        src="images/payment-app.png"
+        class="rounded-xl border border-slate-200 dark:border-slate-700"
+        alt="Payment App screenshot"
+      />
+
+      <p>
+        Full-stack payment system built to simulate real-world transactions.
+        Users can register, log in, and send payments between accounts with
+        backend validation to ensure balance integrity and prevent invalid
+        transfers.
+      </p>
+
+      <pre
+        class="rounded-xl overflow-auto"
+      ><code class="language-csharp">// Example: basic transaction validation logic
+if (sender.Balance >= amount)
+{
+    sender.Balance -= amount;
+    receiver.Balance += amount;
+}
+else
+{
+    throw new Exception("Insufficient funds");
+}
+</code></pre>
+
+      <div class="flex flex-col gap-2 text-sm text-slate-600 dark:text-slate-300">
+        <span>• Authentication system (user registration & login)</span>
+        <span>• Transaction handling with balance validation</span>
+        <span>• REST API integration between frontend and backend</span>
+        <span>• Structured database design for users & transactions</span>
+      </div>
+
+      <div class="flex gap-3">
+        <a
+          target="_blank"
+          href="https://github.com/DominicTalbot/PaymentApp"
+          class="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800"
+          >Repo</a
+        >
+      </div>
+    </div>
+  </div>
+</dialog>
 
     <!-- MINI CHATBOT -->
     <div id="bot" class="fixed bottom-4 right-4 z-50 flex flex-col items-end">
